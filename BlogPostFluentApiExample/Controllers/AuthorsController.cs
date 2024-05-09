@@ -22,12 +22,17 @@ namespace BlogPostFluentApiExample.Controllers
             _authorValidator = new AuthorValidator();
         }
 
+        /// <summary>
+        /// get all the authors
+        /// </summary>
+        /// <remarks>authors</remarks>
+        /// <returns>get all the authorsss</returns>
+        /// <response code="200">Ok</response>
         [HttpGet]
         public async Task<IActionResult> GetAuthors()
         {
             return Ok(await _authorDAL.GetAuthorsRepository());
         }
-
 
         [HttpPost]
         public async Task<IActionResult> AddAuthors(AuthorDto authorDto)
@@ -38,18 +43,13 @@ namespace BlogPostFluentApiExample.Controllers
 
             if (validationResult.IsValid)
             {
-                _authorDAL.AddAuthorsRepository(author);
+                Author resultAuthor = await _authorDAL.AddAuthorsRepository(author);
                 return Ok("New Author has been added successfully");
             }
 
             return BadRequest(validationResult.Errors);
 
         }
-
-        // Add new author to the database with below conditions
-        // 1. Fluent Validation to validate my model
-        // 2. Use DTO
-
 
     }
 }
