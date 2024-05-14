@@ -31,6 +31,11 @@ namespace BlogPostFluentApiExample
             builder.Services.AddScoped<IContext, Context>();
 
             builder.Services.AddScoped<IAuthorDAL, AuthorDAL>();
+            // builder.Services.AddScoped<IBookDAL, BookDAL>();
+
+            // DI for generic repository
+            builder.Services.AddScoped<IGenericRepository<Book>, GenericRepository<Book>>();
+            builder.Services.AddScoped<IGenericRepository<Author>, GenericRepository<Author>>();
 
             // Mapper Configurations
             var mapperConfig = new MapperConfiguration(cfg =>

@@ -13,13 +13,15 @@ namespace BlogPostFluentApiExample.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly IAuthorDAL _authorDAL;
+        private readonly IGenericRepository<Author> genericAuthorRepository;
         private readonly IMapper _mapper;
         private readonly AbstractValidator<Author> _authorValidator;
-        public AuthorsController(IAuthorDAL authorDAL, IMapper mapper)
+        public AuthorsController(IAuthorDAL authorDAL, IMapper mapper, IGenericRepository<Author> genericAuthorRepository)
         {
             _authorDAL = authorDAL;
             _mapper = mapper;
             _authorValidator = new AuthorValidator();
+            this.genericAuthorRepository = genericAuthorRepository;
         }
 
         /// <summary>
@@ -31,7 +33,7 @@ namespace BlogPostFluentApiExample.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAuthors()
         {
-            return Ok(await _authorDAL.GetAuthorsRepository());
+            return Ok(await genericAuthorRepository.GetAll());
         }
 
         [HttpPost]

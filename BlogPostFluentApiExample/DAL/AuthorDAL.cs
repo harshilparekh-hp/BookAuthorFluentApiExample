@@ -5,9 +5,7 @@ namespace BlogPostFluentApiExample.DAL
 {
     public interface IAuthorDAL
     {
-        Task<List<Author>> GetAuthorsRepository();
-
-        Task<Author> AddAuthorsRepository(Author author);
+       
     }
 
     public class AuthorDAL : IAuthorDAL
@@ -32,6 +30,16 @@ namespace BlogPostFluentApiExample.DAL
                 throw new Exception("error occured", ex);
             }
            
+        }
+
+        public Task<Author> DeleteAuthorRepository(int authorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Author> GetAuthorByIdRepository(int authorId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<Author>> GetAuthorsRepository()
